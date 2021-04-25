@@ -13,17 +13,13 @@ const modals = (state) => {
                 closeAllModals()
                 modal.style.display = 'block';
                 document.body.style.overflow = 'hidden';
-                console.log(Object.keys(state).length)
             }
             evt.preventDefault();
         };
 
         const closeModal = () => {
-            // modal.style.display = 'none';
-            // if (modalSelector != '.popup_calc_end' ||  Object.keys(state).length == 7) {
-                closeAllModals();
-                document.body.style.overflow = '';
-            // }
+            closeAllModals();
+            document.body.style.overflow = '';
         }
 
         openBtns.forEach(btn => {

@@ -1,16 +1,10 @@
 import numberInputValidation from './numberInputValidation';
 
 const changeModalState = (state) => {
-    // const deleteInfo = () => {
-    //     if (state.name) delete state.name;
-    //     if (state.phone) delete state.phone;
-    // }
-
     const modalShapes = document.querySelectorAll('.balcon_icons_img');
     modalShapes.forEach((shape, i) => {
         shape.addEventListener('click', () => {
            state.numShape = i;
-        //    deleteInfo();
         });
     })
 
@@ -22,7 +16,6 @@ const changeModalState = (state) => {
     const takeSize = (input, param) => {
         input.addEventListener('input', () => {
             state[param] = input.value;
-            // deleteInfo();
         })
     }
     takeSize(shapeWidth, 'width');
@@ -30,16 +23,15 @@ const changeModalState = (state) => {
 
     const viewType = document.querySelector('#view_type');
     viewType.addEventListener('change', function() {
-        state.type = this.options[this.selectedIndex].value;
+        state.type = viewType.value;
     })
 
     const checkboxes = document.querySelectorAll('.checkbox')
-    const tempers = ['cold', 'warm']
     checkboxes.forEach((box, i) => {
         box.addEventListener('change', () => {
             checkboxes.forEach(box2 => box2.checked = false);
             box.checked = true;
-            state.temp = tempers[i];
+            state.temp = box.nextElementSibling.getAttribute('id');
             console.log(state, Object.keys(state).length);
         })
     })

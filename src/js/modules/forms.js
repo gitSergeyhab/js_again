@@ -55,23 +55,7 @@ import numberInputValidation from './numberInputValidation';
 
 const forms = (state) => {
     const formList = document.querySelectorAll('form');
-    // const inputPhones = document.querySelectorAll('input[name="user_phone"]');
     numberInputValidation('input[name="user_phone"]');
-
-
-    // const inputNames = document.querySelectorAll('input[name="user_name"]');
-    // inputPhones.forEach(iPhone => {
-    //     iPhone.addEventListener('input', () => {
-    //         iPhone.value = iPhone.value.replace(/[^\d-+()]/, '');
-    //         state.phone = iPhone.value;
-    //     })
-    // })
-
-    // inputNames.forEach(iName => {
-    //     iName.addEventListener('input', () => {
-    //         state.name = iName.value;
-    //     })
-    // })
 
     const message = {
         load: 'loading . .. ...',
@@ -87,6 +71,14 @@ const forms = (state) => {
         return await res.text();
     }
 
+    const closeModal = (form) => {
+        const modal = form.closest('.popup_calc_end')
+        if (modal) {
+            modal.style.display = 'none';
+            document.body.style.overflow = '';
+        }
+    }
+
     formList.forEach(form => {
         form.addEventListener('submit', (evt) => {
             const inputs = form.querySelectorAll('input');
@@ -97,6 +89,13 @@ const forms = (state) => {
             form.appendChild(messageEl);
 
             const formData = new FormData(form);
+
+            if (form.closest('.popup_calc_end')) {
+                for (let key in state) {
+                    formData.append(key, state[key]);
+                }
+            };
+
             postData('assets/server.php', formData)
             .then(res => {
                 console.log(res, state);
@@ -109,6 +108,7 @@ const forms = (state) => {
             .finally(() => {
                 inputs.forEach(input => input.value = '');
                 setTimeout(() => messageEl.remove(), 3000);
+                setTimeout(() => closeModal(form), 5000);
             })
         })
     })
