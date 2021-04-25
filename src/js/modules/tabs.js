@@ -1,4 +1,4 @@
-const tabs = (tabSelector, slideSelector, classActive) => {
+const tabs = (tabSelector, slideSelector, classActive, display = 'block') => {
     const tabList = (document.querySelectorAll(tabSelector));
     const sliders = document.querySelectorAll(slideSelector);
 
@@ -7,7 +7,7 @@ const tabs = (tabSelector, slideSelector, classActive) => {
             tabList.forEach(tabInside => tabInside.classList.remove(classActive));
             tab.classList.add(classActive);
             sliders.forEach(slide => slide.style.display = 'none');
-            sliders[i].style.display = 'block';
+            sliders[i].style.display = display;
         });
     })
 }

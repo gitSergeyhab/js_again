@@ -51,12 +51,20 @@
 
 // export default forms;
 
-const forms = () => {
+const forms = (state) => {
     const formList = document.querySelectorAll('form');
     const inputPhones = document.querySelectorAll('input[name="user_phone"]');
+    const inputNames = document.querySelectorAll('input[name="user_name"]');
     inputPhones.forEach(iPhone => {
         iPhone.addEventListener('input', () => {
             iPhone.value = iPhone.value.replace(/[^\d-+()]/, '');
+            state.phone = iPhone.value;
+        })
+    })
+
+    inputNames.forEach(iName => {
+        iName.addEventListener('input', () => {
+            state.name = iName.value;
         })
     })
 
@@ -86,7 +94,7 @@ const forms = () => {
             const formData = new FormData(form);
             postData('assets/server.php', formData)
             .then(res => {
-                console.log(res);
+                console.log(res, state);
                 messageEl.textContent = message.ok;
             })
             .catch(() => {
