@@ -51,22 +51,27 @@
 
 // export default forms;
 
+import numberInputValidation from './numberInputValidation';
+
 const forms = (state) => {
     const formList = document.querySelectorAll('form');
-    const inputPhones = document.querySelectorAll('input[name="user_phone"]');
-    const inputNames = document.querySelectorAll('input[name="user_name"]');
-    inputPhones.forEach(iPhone => {
-        iPhone.addEventListener('input', () => {
-            iPhone.value = iPhone.value.replace(/[^\d-+()]/, '');
-            state.phone = iPhone.value;
-        })
-    })
+    // const inputPhones = document.querySelectorAll('input[name="user_phone"]');
+    numberInputValidation('input[name="user_phone"]');
 
-    inputNames.forEach(iName => {
-        iName.addEventListener('input', () => {
-            state.name = iName.value;
-        })
-    })
+
+    // const inputNames = document.querySelectorAll('input[name="user_name"]');
+    // inputPhones.forEach(iPhone => {
+    //     iPhone.addEventListener('input', () => {
+    //         iPhone.value = iPhone.value.replace(/[^\d-+()]/, '');
+    //         state.phone = iPhone.value;
+    //     })
+    // })
+
+    // inputNames.forEach(iName => {
+    //     iName.addEventListener('input', () => {
+    //         state.name = iName.value;
+    //     })
+    // })
 
     const message = {
         load: 'loading . .. ...',

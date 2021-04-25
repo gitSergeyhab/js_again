@@ -1,23 +1,28 @@
+import numberInputValidation from './numberInputValidation';
+
 const changeModalState = (state) => {
-    const deleteInfo = () => {
-        if (state.name) delete state.name;
-        if (state.phone) delete state.phone;
-    }
+    // const deleteInfo = () => {
+    //     if (state.name) delete state.name;
+    //     if (state.phone) delete state.phone;
+    // }
 
     const modalShapes = document.querySelectorAll('.balcon_icons_img');
     modalShapes.forEach((shape, i) => {
         shape.addEventListener('click', () => {
            state.numShape = i;
-           deleteInfo();
+        //    deleteInfo();
         });
     })
 
     const shapeWidth = document.querySelector('#width');
     const shapeHeight = document.querySelector('#height');
+    numberInputValidation('#width');
+    numberInputValidation('#height');
+
     const takeSize = (input, param) => {
         input.addEventListener('input', () => {
             state[param] = input.value;
-            deleteInfo();
+            // deleteInfo();
         })
     }
     takeSize(shapeWidth, 'width');
